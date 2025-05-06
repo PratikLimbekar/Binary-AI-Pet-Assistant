@@ -63,11 +63,11 @@ def handle_ai_response(input):
     airesponse = getairesponse(input)
     if airesponse:
         def update_ui():
-            chat_box.config(state='normal')
-            chat_box.insert(tk.END, f"You: {input}\n")
-            chat_box.insert(tk.END, f"Binary: {airesponse}\n\n")
-            chat_box.config(state='disabled')
-            chat_box.see(tk.END)
+            # chat_box.config(state='normal')
+            # chat_box.insert(tk.END, f"You: {input}\n")
+            # chat_box.insert(tk.END, f"Binary: {airesponse}\n\n")
+            # chat_box.config(state='disabled')
+            # chat_box.see(tk.END)
             response_label.config(text=airesponse)
             response_label.grid(row=9, column=0, columnspan=2, sticky="w")
             exitbutton.grid(row=9, column=2, sticky="e")
@@ -120,7 +120,7 @@ def toggletts():
 def clearresponse():
     response_label.grid_forget()
     exitbutton.grid_forget()
-    chat_box.grid_forget()
+    # chat_box.grid_forget()
 
 root = tk.Tk(screenName="Binary")
 root.configure(bg='#f0f0f0')
@@ -136,9 +136,6 @@ for i in range(3):
 for i in range(10):
     root.rowconfigure(i, weight=1)
 
-canvas = tk.Canvas(root, width=200, height=200, bd=0, highlightthickness=0)
-canvas.grid(row=0, column=0, columnspan=3, rowspan=10, sticky="nsew")
-
 controlsframe = ttk.Frame(root)
 controlsframe.grid(row=5, column=0, columnspan=3, pady=5)
 
@@ -146,8 +143,9 @@ sendframe = ttk.Frame(root)
 sendframe.grid(row=6, column=0, columnspan=3, pady=5)
 
 chatframe = ttk.Frame(root)
-eyeframe = ttk.Frame(root)
 chatframe.grid(row=2, column=0, columnspan=3)
+
+eyeframe = ttk.Frame(root)
 eyeframe.grid(row=0, column=0, columnspan=3)
 
 eye1_canvas = tk.Canvas(eyeframe, width=30, height=30, bg='#f0f0f0', highlightthickness=0)
@@ -161,12 +159,12 @@ eye2_id = eye2_canvas.create_oval(5, 5, 25, 25, fill='black')
 play = ttk.Button(controlsframe, text="\u23EF\uFE0F", command=lambda: [music.pausemusic(play)])
 next = ttk.Button(controlsframe, text="\u23ED\uFE0F", command=lambda: [music.nextmusic(play)])
 prev = ttk.Button(controlsframe, text="\u23EA", command=lambda: [music.prevmusic(play)])
+loop = ttk.Button(controlsframe, text="Loop: OFF", command=lambda: [music.toggleloop(loop)])
+shuffle = ttk.Button(controlsframe, text="Shuffle OFF", command=lambda: [music.toggleshuffle(shuffle)])
+
 play.grid(column=1, row=3)
 next.grid(column=2, row=3)
 prev.grid(column=0, row=3)
-
-loop = ttk.Button(controlsframe, text="Loop: OFF", command=lambda: [music.toggleloop(loop)])
-shuffle = ttk.Button(controlsframe, text="Shuffle OFF", command=lambda: [music.toggleshuffle(shuffle)])
 loop.grid(column=1, row=4)
 shuffle.grid(column=2, row=4)
 
@@ -176,30 +174,30 @@ volumeslider.set(70)
 volumelabel.grid(column=0, row=5)
 volumeslider.grid(column=1, row=5, columnspan=2)
 
-chat_box = scrolledtext.ScrolledText(chatframe, wrap=tk.WORD, state='normal', width=40, height=10, font=FONT_MAIN)
-chat_box.grid(row=7, column=0, columnspan=3, padx=10, pady=5, sticky="nsew")
+# chat_box = scrolledtext.ScrolledText(chatframe, wrap=tk.WORD, state='normal', width=40, height=10, font=FONT_MAIN)
+# chat_box.grid(row=7, column=0, columnspan=3, padx=10, pady=5, sticky="nsew")
 
 user_entry = ttk.Entry(sendframe)
 user_entry.grid(column=0, row=0, padx=5)
+sendbutton = ttk.Button(sendframe, text="Send", command=sendmessage)
+tts = ttk.Button(sendframe, text="TTS: OFF", command=toggletts)
+
 user_entry.bind("<Return>", lambda event: sendmessage())
 
-sendbutton = ttk.Button(sendframe, text="Send", command=sendmessage)
 sendbutton.grid(row=0, column=1)
-
-tts = ttk.Button(sendframe, text="TTS: OFF", command=toggletts)
 tts.grid(row=0, column=2)
 
 response_label = tk.Label(chatframe, text="", font=FONT_AI, wraplength=250, justify="left", bg=COLOR_BG, fg=COLOR_FG, bd=2, relief="solid", padx=10, pady=5)
 
-chat_box.bind("<Button-1>", lambda event: on_chat_click(event))
+# chat_box.bind("<Button-1>", lambda event: on_chat_click(event))
 
 exitbutton = ttk.Button(chatframe, text='x', width=3, command=clearresponse)
 
-def on_chat_click(event):
-    index = chat_box.index("@%s,%s" % (event.x, event.y))
-    line = chat_box.get(f"{index} linestart", f"{index} lineend")
-    if line.startswith("You: "):
-        user_entry.insert(0, line[5:])
+# def on_chat_click(event):
+#     index = chat_box.index("@%s,%s" % (event.x, event.y))
+#     line = chat_box.get(f"{index} linestart", f"{index} lineend")
+#     if line.startswith("You: "):
+#         user_entry.insert(0, line[5:])
 
 eye1_canvas.bind("<Button-1>", blink)
 eye2_canvas.bind("<Button-1>", blink)
@@ -208,7 +206,7 @@ root.columnconfigure(0, weight=1)
 root.rowconfigure(7, weight=1)
 root.resizable(True, True)
 
-chat_box.grid_forget()
+# chat_box.grid_forget()
 blinktimer()
 music.check_music_end(root)
 threading.Thread(target=voicethread, daemon=True).start()
