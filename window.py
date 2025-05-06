@@ -1,21 +1,3 @@
-"""
-tkinter info:
-widgets
-A Tkinter user interface is made up of individual widgets. Each widget is represented as a Python object, instantiated from classes like ttk.Frame, ttk.Label, and ttk.Button.
-
-widget hierarchy
-Widgets are arranged in a hierarchy. The label and button were contained within a frame, which in turn was contained within the root window. When creating each child widget, its parent widget is passed as the first argument to the widget constructor.
-
-configuration options
-Widgets have configuration options, which modify their appearance and behavior, such as the text to display in a label or button. Different classes of widgets will have different sets of options.
-
-geometry management
-Widgets aren’t automatically added to the user interface when they are created. A geometry manager like grid controls where in the user interface they are placed.
-
-event loop
-Tkinter reacts to user input, changes from your program, and even refreshes the display only when actively running an event loop. If your program isn’t running the event loop, your user interface won’t update.
-"""
-
 import tkinter as tk
 from tkinter import scrolledtext
 from tkinter import ttk #provides access to themed widgets, such as win11
@@ -45,6 +27,12 @@ pygame.mixer.init()
 isstaring = False
 ttsenabled = False
 
+#fonts and colors
+FONT_MAIN = ("Segoe UI", 10)
+FONT_AI = ("Comic Sans MS", 12)
+COLOR_BG = "#fff8dc"
+COLOR_FG = "#444"
+
 #following function sends text to AI
 def getairesponse(text):
     wiseprompt = (
@@ -63,65 +51,56 @@ def getairesponse(text):
 def sendmessage():
     input = user_entry.get()
     if input:
+        sendbutton.config(state='disabled')
+        response_label.grid(row=9, column=0, columnspan=2, sticky="w")
         response_label.config(text="Thinking...")
         response_label.grid(row=9, column=0)
         root.update_idletasks()
-
         user_entry.delete(0, tk.END)
-
-        #implementing threading
         threading.Thread(target=handle_ai_response, args=(input,)).start()
 
 def handle_ai_response(input):
     airesponse = getairesponse(input)
-
     if airesponse:
         def update_ui():
-            chat_box.config(state='normal') #enables editing state of chatbox
-            chat_box.insert(tk.END, f"You: {input}\n") #appends our input
-            chat_box.insert(tk.END, f"Binary: {airesponse}\n\n") #appends ai response
-            chat_box.config(state='disabled') #disables editing state of chatbox
+            chat_box.config(state='normal')
+            chat_box.insert(tk.END, f"You: {input}\n")
+            chat_box.insert(tk.END, f"Binary: {airesponse}\n\n")
+            chat_box.config(state='disabled')
             chat_box.see(tk.END)
-            # root.after(5000, lambda: response_label.config(text=""))
-
-
-            # Also show response briefly in label
             response_label.config(text=airesponse)
-            response_label.grid(row=9, column=0)
-        
-        root.after(0, update_ui)
+            response_label.grid(row=9, column=0, columnspan=2, sticky="w")
+            exitbutton.grid(row=9, column=2, sticky="e")
 
+            sendbutton.config(state='normal')
+        root.after(0, update_ui)
         logging.info(input)
         logging.info("AIPP: " + airesponse)
         return airesponse
     else:
         return None
 
-#blinking functions
 def blinktimer():
     if not music.is_playing and not isstaring:
-        eye1.config(text='-' if eye1.cget("text") == "●" else "●")
-        eye2.config(text='-' if eye2.cget("text") == "●" else "●")
+        eye1_canvas.itemconfig(eye1_id, fill='black' if eye1_canvas.itemcget(eye1_id, "fill") == "white" else "white")
+        eye2_canvas.itemconfig(eye2_id, fill='black' if eye2_canvas.itemcget(eye2_id, "fill") == "white" else "white")
     elif isstaring:
-        eye1.config(text="●")
-        eye2.config(text="●")
-
+        eye1_canvas.itemconfig(eye1_id, fill='black')
+        eye2_canvas.itemconfig(eye2_id, fill='black')
     root.after(1001, blinktimer)
 
 def blink(event=None):
     if not music.is_playing and not isstaring:
-        eye1.config(text="-" if eye1.cget("text") == "●" else "●")
-        eye2.config(text="-" if eye2.cget("text") == "●" else "●")
+        eye1_canvas.itemconfig(eye1_id, fill='white' if eye1_canvas.itemcget(eye1_id, "fill") == "black" else "black")
+        eye2_canvas.itemconfig(eye2_id, fill='white' if eye2_canvas.itemcget(eye2_id, "fill") == "black" else "black")
     else:
-        eye1.config(text="●")
-        eye2.config(text="●")
-
+        eye1_canvas.itemconfig(eye1_id, fill='black')
+        eye2_canvas.itemconfig(eye2_id, fill='black')
 
 def look():
     global isstaring
     isstaring = True
 
-#checks for hotword and voice input
 def voicethread():
     global isstaring, ttsenabled
     while True:
@@ -136,81 +115,101 @@ def voicethread():
 def toggletts():
     global ttsenabled
     ttsenabled = not ttsenabled
+    tts.config(text="TTS: ON" if ttsenabled else "TTS: OFF")
 
-    if ttsenabled:
-        tts.config(text="TTS: ON")
-    else:
-        tts.config(text="TTS: OFF")
+def clearresponse():
+    response_label.grid_forget()
+    exitbutton.grid_forget()
+    chat_box.grid_forget()
 
-#create window and initialise widgets
 root = tk.Tk(screenName="Binary")
-# root.geometry("240x80")
+root.configure(bg='#f0f0f0')
 root.attributes('-topmost', True)
 
-frame = ttk.Frame(root, padding=10)#creates a frame widget inside a root window
-frame.grid()
+style = ttk.Style()
+style.configure('TButton', font=FONT_MAIN, padding=5)
+style.configure('TLabel', font=FONT_MAIN)
+style.theme_use('clam')
 
-ttk.Label(frame, text="AIPP").grid(column=1, row=0) #label widget
-eye1 = ttk.Label(frame, text="●", font=("Arial", 20))
-eye1.grid(column=0, row=2)
-eye2 = ttk.Label(frame, text="●", font=("Arial", 20))
-eye2.grid(column=2, row=2)
-play = ttk.Button(frame, text="⏯️",  #button widget
-           command = lambda: [music.pausemusic(play)]
-           )
-next = ttk.Button(frame, text="⏭️",  #button widget
-           command = lambda: [music.nextmusic(play)]
-           )
-prev = ttk.Button(frame, text="⏪",  #button widget
-           command = lambda: [music.prevmusic(play)]
-           )
+for i in range(3):
+    root.columnconfigure(i, weight=1)
+for i in range(10):
+    root.rowconfigure(i, weight=1)
+
+canvas = tk.Canvas(root, width=200, height=200, bd=0, highlightthickness=0)
+canvas.grid(row=0, column=0, columnspan=3, rowspan=10, sticky="nsew")
+
+controlsframe = ttk.Frame(root)
+controlsframe.grid(row=5, column=0, columnspan=3, pady=5)
+
+sendframe = ttk.Frame(root)
+sendframe.grid(row=6, column=0, columnspan=3, pady=5)
+
+chatframe = ttk.Frame(root)
+eyeframe = ttk.Frame(root)
+chatframe.grid(row=2, column=0, columnspan=3)
+eyeframe.grid(row=0, column=0, columnspan=3)
+
+eye1_canvas = tk.Canvas(eyeframe, width=30, height=30, bg='#f0f0f0', highlightthickness=0)
+eye1_canvas.grid(column=0, row=2)
+eye1_id = eye1_canvas.create_oval(5, 5, 25, 25, fill='black')
+
+eye2_canvas = tk.Canvas(eyeframe, width=30, height=30, bg='#f0f0f0', highlightthickness=0)
+eye2_canvas.grid(column=2, row=2)
+eye2_id = eye2_canvas.create_oval(5, 5, 25, 25, fill='black')
+
+play = ttk.Button(controlsframe, text="\u23EF\uFE0F", command=lambda: [music.pausemusic(play)])
+next = ttk.Button(controlsframe, text="\u23ED\uFE0F", command=lambda: [music.nextmusic(play)])
+prev = ttk.Button(controlsframe, text="\u23EA", command=lambda: [music.prevmusic(play)])
 play.grid(column=1, row=3)
 next.grid(column=2, row=3)
 prev.grid(column=0, row=3)
 
-loop = ttk.Button(frame, text="Loop: OFF",  #button widget
-           command = lambda: [music.toggleloop(loop)]
-           )
-shuffle = ttk.Button(frame, text="Shuffle OFF",  #button widget
-           command = lambda: [music.toggleshuffle(shuffle)]
-           )
-
+loop = ttk.Button(controlsframe, text="Loop: OFF", command=lambda: [music.toggleloop(loop)])
+shuffle = ttk.Button(controlsframe, text="Shuffle OFF", command=lambda: [music.toggleshuffle(shuffle)])
 loop.grid(column=1, row=4)
 shuffle.grid(column=2, row=4)
 
-volumelabel = ttk.Label(frame, text="Volume")
-volumeslider = ttk.Scale(frame, from_=0, to=100, 
-                         orient="horizontal", command=music.setvolume)
+volumelabel = ttk.Label(controlsframe, text="Volume")
+volumeslider = ttk.Scale(controlsframe, from_=0, to=100, orient="horizontal", command=music.setvolume)
 volumeslider.set(70)
-
 volumelabel.grid(column=0, row=5)
 volumeslider.grid(column=1, row=5, columnspan=2)
 
-chat_box = scrolledtext.ScrolledText(root,
-                                     wrap = tk.WORD, state='normal')
-chat_box.grid(row=7, column=0)
+chat_box = scrolledtext.ScrolledText(chatframe, wrap=tk.WORD, state='normal', width=40, height=10, font=FONT_MAIN)
+chat_box.grid(row=7, column=0, columnspan=3, padx=10, pady=5, sticky="nsew")
 
-user_entry = tk.Entry(root)
-user_entry.grid(column=0, row=7)
+user_entry = ttk.Entry(sendframe)
+user_entry.grid(column=0, row=0, padx=5)
+user_entry.bind("<Return>", lambda event: sendmessage())
 
-sendbutton = tk.Button(root, text="Send", command=sendmessage)
-sendbutton.grid(row=8, column=1)
+sendbutton = ttk.Button(sendframe, text="Send", command=sendmessage)
+sendbutton.grid(row=0, column=1)
 
-tts = tk.Button(root,text="TTS: OFF", command=toggletts)
-tts.grid(row=8, column=2)
+tts = ttk.Button(sendframe, text="TTS: OFF", command=toggletts)
+tts.grid(row=0, column=2)
 
-response_label = tk.Label(root, text="", font=("Comic Sans MS", 12), wraplength=250, justify="left", bg="white", bd=2, relief="solid", padx=10, pady=5)
+response_label = tk.Label(chatframe, text="", font=FONT_AI, wraplength=250, justify="left", bg=COLOR_BG, fg=COLOR_FG, bd=2, relief="solid", padx=10, pady=5)
 
-eye1.bind("<Button-1>", blink)
-eye2.bind("<Button-1>", blink)
+chat_box.bind("<Button-1>", lambda event: on_chat_click(event))
 
+exitbutton = ttk.Button(chatframe, text='x', width=3, command=clearresponse)
 
-chat_box.grid_remove()
+def on_chat_click(event):
+    index = chat_box.index("@%s,%s" % (event.x, event.y))
+    line = chat_box.get(f"{index} linestart", f"{index} lineend")
+    if line.startswith("You: "):
+        user_entry.insert(0, line[5:])
+
+eye1_canvas.bind("<Button-1>", blink)
+eye2_canvas.bind("<Button-1>", blink)
+
+root.columnconfigure(0, weight=1)
+root.rowconfigure(7, weight=1)
+root.resizable(True, True)
+
+chat_box.grid_forget()
 blinktimer()
 music.check_music_end(root)
 threading.Thread(target=voicethread, daemon=True).start()
-root.mainloop() #puts everything on display
-
-
-
-
+root.mainloop()
