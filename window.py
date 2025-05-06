@@ -24,7 +24,16 @@ import pygame
 import os
 from dotenv import load_dotenv
 from google import genai
+
 import threading
+import logging
+
+logging.basicConfig(
+    filename='aipp_chat_log.txt',
+    level=logging.INFO,
+    format='%(asctime)s - USER: %(message)s',
+    datefmt='%d-%m-%Y %H: %M: %S'
+)
 
 #gemini
 load_dotenv()
@@ -50,10 +59,21 @@ def sendmessage():
         response_label.grid(row=9, column=0)
         root.update_idletasks()
 
-        ai_response = getairesponse(input)
-        # ai_response = 'hello'
-        response_label.config(text=ai_response) #replace with ai response
         user_entry.delete(0, tk.END)
+
+        #implementing threading
+        threading.Thread(target=handle_ai_response, args=(input,)).start()
+
+def handle_ai_response(input):
+    airesponse = getairesponse(input)
+
+    def update_ui():
+        response_label.config(text=airesponse)
+    
+    root.after(0, update_ui)
+
+    logging.info(input)
+    logging.info("AIPP: " + airesponse)
 
 #initialise pygame
 pygame.mixer.init()
