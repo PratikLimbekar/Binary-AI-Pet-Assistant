@@ -24,7 +24,7 @@ import pygame
 import os
 from dotenv import load_dotenv
 from google import genai
-
+import voice
 import threading
 import logging
 
@@ -40,11 +40,16 @@ load_dotenv()
 apikey = os.getenv('gemini_api_key')
 client = genai.Client(api_key=apikey)
 
+#initialise pygame
+pygame.mixer.init()
+isstaring = False
+ttsenabled = False
+
 #following function sends text to AI
 def getairesponse(text):
     try:
         response = client.models.generate_content(
-        model="gemini-2.0-flash", contents = text
+        model="gemini-2.0-flash", contents = "You are a virtual pet/AI assistant called binary. answer the following in three sentences or less, the shorter the answer the better. Single word answers are preferred: " + text
         )
         print(response.text)
         return response.text
@@ -67,36 +72,75 @@ def sendmessage():
 def handle_ai_response(input):
     airesponse = getairesponse(input)
 
-    def update_ui():
-        response_label.config(text=airesponse)
-    
-    root.after(0, update_ui)
+    if airesponse:
+        def update_ui():
+            chat_box.config(state='normal') #enables editing state of chatbox
+            chat_box.insert(tk.END, f"You: {input}\n") #appends our input
+            chat_box.insert(tk.END, f"Binary: {airesponse}\n\n") #appends ai response
+            chat_box.config(state='disabled') #disables editing state of chatbox
+            chat_box.see(tk.END)
+            # root.after(5000, lambda: response_label.config(text=""))
 
-    logging.info(input)
-    logging.info("AIPP: " + airesponse)
 
-#initialise pygame
-pygame.mixer.init()
+            # Also show response briefly in label
+            response_label.config(text=airesponse)
+            response_label.grid(row=9, column=0)
+        
+        root.after(0, update_ui)
+
+        logging.info(input)
+        logging.info("AIPP: " + airesponse)
+        return airesponse
+    else:
+        return None
 
 #blinking functions
 def blinktimer():
-    if not music.is_playing:
+    if not music.is_playing and not isstaring:
         eye1.config(text='-' if eye1.cget("text") == "●" else "●")
         eye2.config(text='-' if eye2.cget("text") == "●" else "●")
+    elif isstaring:
+        eye1.config(text="●")
+        eye2.config(text="●")
 
     root.after(1001, blinktimer)
 
 def blink(event=None):
-    if not music.is_playing:
-         eye1.config(text="-" if eye1.cget("text") == "●" else "●")
-         eye2.config(text="-" if eye2.cget("text") == "●" else "●")
-         #cget retrieves current value of widget config
+    if not music.is_playing and not isstaring:
+        eye1.config(text="-" if eye1.cget("text") == "●" else "●")
+        eye2.config(text="-" if eye2.cget("text") == "●" else "●")
     else:
         eye1.config(text="●")
         eye2.config(text="●")
 
+
+def look():
+    global isstaring
+    isstaring = True
+
+#checks for hotword and voice input
+def voicethread():
+    global isstaring, ttsenabled
+    while True:
+        userinput = voice.waitforbinary()
+        if userinput:
+            look()
+            response = handle_ai_response(userinput)
+            if ttsenabled:
+                voice.speakresponse(response)
+            isstaring = False
+
+def toggletts():
+    global ttsenabled
+    ttsenabled = not ttsenabled
+
+    if ttsenabled:
+        tts.config(text="TTS: ON")
+    else:
+        tts.config(text="TTS: OFF")
+
 #create window and initialise widgets
-root = tk.Tk(screenName="AIPP")
+root = tk.Tk(screenName="Binary")
 # root.geometry("240x80")
 root.attributes('-topmost', True)
 
@@ -143,23 +187,27 @@ chat_box = scrolledtext.ScrolledText(root,
                                      wrap = tk.WORD, state='normal')
 chat_box.grid(row=7, column=0)
 
-user_entry = tk.Entry(root, width=40)
+user_entry = tk.Entry(root)
 user_entry.grid(column=0, row=7)
 
 sendbutton = tk.Button(root, text="Send", command=sendmessage)
-sendbutton.grid(row=8, column=0)
+sendbutton.grid(row=8, column=1)
+
+tts = tk.Button(root,text="TTS: OFF", command=toggletts)
+tts.grid(row=8, column=2)
 
 response_label = tk.Label(root, text="", font=("Comic Sans MS", 12), wraplength=250, justify="left", bg="white", bd=2, relief="solid", padx=10, pady=5)
-
-
-chat_box.grid_remove()
-
-blinktimer()
 
 eye1.bind("<Button-1>", blink)
 eye2.bind("<Button-1>", blink)
 
+
+chat_box.grid_remove()
+blinktimer()
 music.check_music_end(root)
-
-
+threading.Thread(target=voicethread, daemon=True).start()
 root.mainloop() #puts everything on display
+
+
+
+
