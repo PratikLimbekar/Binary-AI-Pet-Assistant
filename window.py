@@ -17,17 +17,72 @@ Tkinter reacts to user input, changes from your program, and even refreshes the 
 """
 
 import tkinter as tk
+from tkinter import scrolledtext
 from tkinter import ttk #provides access to themed widgets, such as win11
 import music
 import pygame
+import os
+from dotenv import load_dotenv
+from google import genai
+import threading
 
+#gemini
+load_dotenv()
+apikey = os.getenv('gemini_api_key')
+client = genai.Client(api_key=apikey)
+
+#following function sends text to AI
+def getairesponse(text):
+    try:
+        response = client.models.generate_content(
+        model="gemini-2.0-flash", contents = text
+        )
+        print(response.text)
+        return response.text
+    except Exception as e:
+        return "Sorry, cannot comprehend this. Me just a pet bro."
+
+#this handles the button click event
+def sendmessage():
+    input = user_entry.get()
+    if input:
+        response_label.config(text="Thinking...")
+        response_label.grid(row=9, column=0)
+        root.update_idletasks()
+
+        ai_response = getairesponse(input)
+        # ai_response = 'hello'
+        response_label.config(text=ai_response) #replace with ai response
+        user_entry.delete(0, tk.END)
+
+#initialise pygame
 pygame.mixer.init()
 
+#blinking functions
+def blinktimer():
+    if not music.is_playing:
+        eye1.config(text='-' if eye1.cget("text") == "●" else "●")
+        eye2.config(text='-' if eye2.cget("text") == "●" else "●")
+
+    root.after(1001, blinktimer)
+
+def blink(event=None):
+    if not music.is_playing:
+         eye1.config(text="-" if eye1.cget("text") == "●" else "●")
+         eye2.config(text="-" if eye2.cget("text") == "●" else "●")
+         #cget retrieves current value of widget config
+    else:
+        eye1.config(text="●")
+        eye2.config(text="●")
+
+#create window and initialise widgets
 root = tk.Tk(screenName="AIPP")
 # root.geometry("240x80")
 root.attributes('-topmost', True)
+
 frame = ttk.Frame(root, padding=10)#creates a frame widget inside a root window
 frame.grid()
+
 ttk.Label(frame, text="AIPP").grid(column=1, row=0) #label widget
 eye1 = ttk.Label(frame, text="●", font=("Arial", 20))
 eye1.grid(column=0, row=2)
@@ -64,28 +119,27 @@ volumeslider.set(70)
 volumelabel.grid(column=0, row=5)
 volumeslider.grid(column=1, row=5, columnspan=2)
 
+chat_box = scrolledtext.ScrolledText(root,
+                                     wrap = tk.WORD, state='normal')
+chat_box.grid(row=7, column=0)
+
+user_entry = tk.Entry(root, width=40)
+user_entry.grid(column=0, row=7)
+
+sendbutton = tk.Button(root, text="Send", command=sendmessage)
+sendbutton.grid(row=8, column=0)
+
+response_label = tk.Label(root, text="", font=("Comic Sans MS", 12), wraplength=250, justify="left", bg="white", bd=2, relief="solid", padx=10, pady=5)
 
 
-def blinktimer():
-    if not music.is_playing:
-        eye1.config(text='-' if eye1.cget("text") == "●" else "●")
-        eye2.config(text='-' if eye2.cget("text") == "●" else "●")
-
-    root.after(1001, blinktimer)
+chat_box.grid_remove()
 
 blinktimer()
-
-def blink(event=None):
-    if not music.is_playing:
-         eye1.config(text="-" if eye1.cget("text") == "●" else "●")
-         eye2.config(text="-" if eye2.cget("text") == "●" else "●")
-         #cget retrieves current value of widget config
-    else:
-        eye1.config(text="●")
-        eye2.config(text="●")
 
 eye1.bind("<Button-1>", blink)
 eye2.bind("<Button-1>", blink)
 
 music.check_music_end(root)
+
+
 root.mainloop() #puts everything on display
