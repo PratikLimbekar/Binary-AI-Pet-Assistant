@@ -22,6 +22,8 @@ apikey = os.getenv('porcupine_key')
 porcupine = pvporcupine.create(keyword_paths=["Binary.ppn"], access_key=apikey)
 
 engine = pyttsx3.init()
+engine.setProperty('rate', 200)
+engine.setProperty('volume', 0.9)
 
 def listentouser():
     recogniser = sr.Recognizer()

@@ -47,9 +47,12 @@ ttsenabled = False
 
 #following function sends text to AI
 def getairesponse(text):
+    wiseprompt = (
+        "You are Binary, a wise old owl who speaks calmly and thoughtfully. You explain things clearly, using gentle and poetic language. Keep responses short but meaningful. At most three sentences. Single word answers are preferred."
+    )
     try:
         response = client.models.generate_content(
-        model="gemini-2.0-flash", contents = "You are a virtual pet/AI assistant called binary. answer the following in three sentences or less, the shorter the answer the better. Single word answers are preferred: " + text
+        model="gemini-2.0-flash", contents = wiseprompt + text
         )
         print(response.text)
         return response.text
