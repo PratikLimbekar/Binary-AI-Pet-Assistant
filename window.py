@@ -25,7 +25,7 @@ client = genai.Client(api_key=apikey)
 #initialise pygame
 pygame.mixer.init()
 isstaring = False
-ttsenabled = False
+ttsenabled = True
 collapseafterid = None #global var to track scheduled collapse
 stayactive = False #stay active for window
 
@@ -69,7 +69,6 @@ def handle_ai_response(input):
             response_label.config(text=airesponse)
             response_label.grid(row=9, column=0, columnspan=2, sticky="w")
             exitbutton.grid(row=9, column=2, sticky="e")
-
             sendbutton.config(state='normal')
         root.after(0, update_ui)
         logging.info(input)
@@ -100,15 +99,26 @@ def look():
     isstaring = True
 
 def voicethread():
-    global isstaring, ttsenabled
+    global isstaring, ttsenabled, stayactive
     while True:
         userinput = voice.waitforbinary()
         if userinput:
+            root.after(0, lambda: [set_stay(True), expand_ui(), cancelscheduledcollapse()])
             look()
             response = handle_ai_response(userinput)
             if ttsenabled:
                 voice.speakresponse(response)
             isstaring = False
+            # Wait a bit before disabling stay and triggering collapse
+            def reset_stay():
+                set_stay(False)
+                schedule_collapse()
+            root.after(5000, reset_stay)  # wait 5 seconds before collapsing
+
+def set_stay(value: bool):
+    global stayactive
+    stayactive = value
+    staybutton.config(text="Stay: ON" if value else "Stay: OFF")
 
 def toggletts():
     global ttsenabled
@@ -126,13 +136,13 @@ def expand_ui(event=None):
     controlsframe.grid()
     sendframe.grid()
     chatframe.grid()
+    notebook.grid()
     root.update_idletasks() #forces layout to update *before* resizing
     root.geometry("")
 
 def collapse_gui(event=None):
-    controlsframe.grid_remove()
-    sendframe.grid_remove()
-    chatframe.grid_remove()
+    for widget in [controlsframe, sendframe, chatframe, notebook, response_label]:
+        widget.grid_remove()
     root.update_idletasks()
     root.overrideredirect(True)
     root.geometry("")
@@ -143,7 +153,7 @@ def schedule_collapse():
         return
     if collapseafterid is not None:
         root.after_cancel(collapseafterid)
-    collapseafterid = root.after(6000, collapse_gui) #3second delay
+    collapseafterid = root.after(3000, collapse_gui) #3second delay
 
 def cancelscheduledcollapse(event=None):
     global collapseafterid
@@ -165,45 +175,69 @@ def togglestay():
 root = tk.Tk(screenName="Binary")
 root.bind("<FocusOut>",lambda e: schedule_collapse())
 root.bind("<FocusIn>", cancelscheduledcollapse)
-root.configure(bg='#f0f0f0')
+root.configure(bg='#36454f')
 root.attributes('-topmost', True)
 root.overrideredirect(True) #removes window borders
 
+#notebook to create and keep seperate tabs
+notebook = ttk.Notebook(root, style='TNotebook', padding=0)
+notebook.grid(row=2, column=0, columnspan=3, sticky="nsew")
+notebook.configure(takefocus=0)
+
+chat_tab = tk.Frame(notebook, bg='#36454f', borderwidth=0)
+musictab = tk.Frame(notebook, bg='#36454f', borderwidth=0)
+
+notebook.add(chat_tab, text="Chat")
+notebook.add(musictab, text="Music")
+
 style = ttk.Style()
-style.configure('TButton', font=FONT_MAIN, padding=5)
-style.configure('TLabel', font=FONT_MAIN)
 style.theme_use('clam')
+style.configure('TNotebook', background='#36454f', borderwidth=0, padding=0)
+style.configure("TNotebook.Client", background="#36454f")
+
+style.configure('TNotebook.Tab',
+                background='#36454f',
+                foreground='#fefcfb',
+                padding=[10,5])
+style.map('TNotebook.Tab',
+          background=[('selected', '#151b1f')],
+          foreground=[('selected', '#FEFCFB')])
+
+style.layout("TNotebook", [
+    ("Notebook.client", {"sticky": "nswe"})  # override default padding
+])
 
 for i in range(3):
     root.columnconfigure(i, weight=1)
 for i in range(10):
     root.rowconfigure(i, weight=1)
 
-controlsframe = tk.Frame(root, bg='#36454f')
-controlsframe.grid(row=5, column=0, columnspan=3, pady=5)
+controlsframe = tk.Frame(musictab, bg='#36454f')
+controlsframe.grid(row=2, column=0, columnspan=3, pady=5)
 
-sendframe = tk.Frame(root, bg='#36454f')
+sendframe = tk.Frame(chat_tab, bg='#36454f')
 sendframe.grid(row=6, column=0, columnspan=3, pady=5)
 
-chatframe = tk.Frame(root, bg="#36454f")
+chatframe = tk.Frame(chat_tab, bg="#36454f")
 chatframe.grid(row=2, column=0, columnspan=3)
 
 eyeframe = tk.Frame(root, bg='#7692ff')
-eyeframe.grid(row=1, column=0, columnspan=3)
+eyeframe.grid(row=0, column=0, columnspan=3)
 
 controlsframe.grid_remove()
 sendframe.grid_remove()
 chatframe.grid_remove()
+notebook.grid_remove()
 
 
 eye1_canvas = tk.Canvas(eyeframe, width=30, height=30, bg='#36454f', highlightthickness=0)
-eye1_canvas.grid(column=0, row=2)
+eye1_canvas.grid(column=1, row=0)
 # Outer white ring
 eye1_canvas.create_oval(3, 3, 27, 27, fill='#fefcfb', outline='')  # white ring
 eye1_id = eye1_canvas.create_oval(5, 5, 25, 25, fill='#fefcfb')
 
 eye2_canvas = tk.Canvas(eyeframe, width=30, height=30, bg='#151b1f', highlightthickness=0)
-eye2_canvas.grid(column=2, row=2)
+eye2_canvas.grid(column=2, row=0)
 # Outer white ring
 eye2_canvas.create_oval(3, 3, 27, 27, fill='#fefcfb', outline='')  # white ring
 eye2_id = eye2_canvas.create_oval(5, 5, 25, 25, fill='#fefcfb')
@@ -215,7 +249,7 @@ loop = tk.Button(controlsframe, text="Loop: OFF", command=lambda: [music.togglel
 shuffle = tk.Button(controlsframe, text="Shuffle OFF", command=lambda: [music.toggleshuffle(shuffle)], bg="#36454f", fg="#fefcfb")
 
 play.grid(column=1, row=3)
-next.grid(column=2, row=3)
+next.grid(column=4, row=3)
 prev.grid(column=0, row=3)
 loop.grid(column=1, row=4)
 shuffle.grid(column=2, row=4)
@@ -232,7 +266,6 @@ sendbutton = tk.Button(sendframe, text="Send", command=sendmessage, bg="#36454f"
 tts = tk.Button(sendframe, text="TTS: OFF", command=toggletts, bg="#36454f", fg="#fefcfb")
 
 user_entry.bind("<Return>", lambda event: sendmessage())
-
 sendbutton.grid(row=0, column=1)
 tts.grid(row=0, column=2)
 
@@ -242,8 +275,8 @@ response_label = tk.Label(chatframe, text="", justify="left", font=FONT_AI, wrap
 
 exitbutton = tk.Button(chatframe, text='x', width=3, command=clearresponse, bg="#36454f", fg="#fefcfb")
 
-staybutton = tk.Button(controlsframe, text="Stay: OFF", command=togglestay, bg="#36454f", fg="#fefcfb")
-staybutton.grid(column=0, row=6, columnspan=3, pady=5)
+staybutton = tk.Button(sendframe, text="Stay: OFF", command=togglestay, bg="#36454f", fg="#fefcfb")
+staybutton.grid(column=0, row=1, columnspan=3, pady=5)
 
 # eyeframe.bind("<B1-Motion>", domove)
 eye1_canvas.bind("<Button-1>", expand_ui)
@@ -253,7 +286,10 @@ eye2_canvas.bind("<Button-1>", expand_ui)
 
 root.columnconfigure(0, weight=1)
 root.rowconfigure(7, weight=1)
+chat_tab.rowconfigure(0, weight=1)
+musictab.rowconfigure(0, weight=1)
 root.resizable(True, True)
+
 
 root.configure(bg='#353935')
 
