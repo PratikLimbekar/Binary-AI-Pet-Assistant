@@ -1190,3 +1190,291 @@ Explanation: The query asks for an image. As a text-based model, I cannot create
 12-06-2025 11: 27: 48 - USER: AIPP: Opening desktop
 12-06-2025 11: 27: 57 - USER: open explorer
 12-06-2025 11: 27: 57 - USER: AIPP: Opening explorer
+02-07-2025 18: 37: 49 - USER: Use pytorch device_name: cpu
+02-07-2025 18: 37: 49 - USER: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+02-07-2025 18: 37: 54 - USER: AFC is enabled with max remote calls: 10.
+02-07-2025 18: 37: 55 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+02-07-2025 18: 37: 55 - USER: AFC remote call 1 is done.
+02-07-2025 18: 37: 55 - USER: hello there binary
+02-07-2025 18: 37: 55 - USER: AIPP: Hoo there, little spark. I see you. Wisdom nests within.
+
+02-07-2025 18: 38: 13 - USER: open edge
+02-07-2025 18: 38: 13 - USER: AIPP: Opening edge
+02-07-2025 18: 38: 18 - USER: open chrome
+02-07-2025 18: 38: 18 - USER: AIPP: Opening chrome
+02-07-2025 18: 38: 32 - USER: good morning how are you doing
+02-07-2025 18: 38: 32 - USER: AIPP: Weather in Pune:
+- Condition: Overcast clouds
+- Temperature: 26.8°C (Feels like 29.3°C)
+- Humidity: 80%
+02-07-2025 18: 38: 48 - USER: search Stephen Hawking on Wikipedia
+02-07-2025 18: 38: 48 - USER: AIPP: Hawking radiation is black-body radiation released outside a black hole's event horizon due to quantum effects according to a model developed by Stephen Hawking in 1974. 
+The radiation was not predicted by previous models which assumed that once electromagnetic radiation is inside the event horizon, it cannot escape. Hawking radiation is predicted to be extremely faint and is many orders of magnitude below the current best telescopes' detecting ability.
+02-07-2025 18: 39: 07 - USER: AFC is enabled with max remote calls: 10.
+02-07-2025 18: 39: 08 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+02-07-2025 18: 39: 08 - USER: AFC remote call 1 is done.
+02-07-2025 18: 39: 08 - USER: what is the capital of England
+02-07-2025 18: 39: 08 - USER: AIPP: London.
+
+02-07-2025 18: 39: 42 - USER: AFC is enabled with max remote calls: 10.
+02-07-2025 18: 39: 46 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent "HTTP/1.1 200 OK"
+02-07-2025 18: 39: 48 - USER: AFC remote call 1 is done.
+02-07-2025 18: 45: 08 - USER: Use pytorch device_name: cpu
+02-07-2025 18: 45: 08 - USER: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+02-07-2025 18: 45: 13 - USER: AFC is enabled with max remote calls: 10.
+02-07-2025 18: 45: 14 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+02-07-2025 18: 45: 14 - USER: AFC remote call 1 is done.
+02-07-2025 18: 45: 14 - USER: good morning
+02-07-2025 18: 45: 14 - USER: AIPP: Good morning.
+
+The dawn unfurls, a gentle bloom. May its light guide you.
+
+02-07-2025 18: 46: 04 - USER: AFC is enabled with max remote calls: 10.
+02-07-2025 18: 46: 05 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+02-07-2025 18: 46: 05 - USER: AFC remote call 1 is done.
+02-07-2025 18: 46: 05 - USER: good morning
+02-07-2025 18: 46: 05 - USER: AIPP: Dawn.
+
+02-07-2025 18: 46: 15 - USER: can you search for Stephen Hawking on Wikipedia
+02-07-2025 18: 46: 15 - USER: AIPP: Stephen William Hawking (8 January 1942 – 14 March 2018) was an English theoretical physicist, cosmologist, and author who was director of research at the Centre for Theoretical Cosmology at the University of Cambridge. Between 1979 and 2009, he was the Lucasian Professor of Mathematics at Cambridge, widely viewed as one of the most prestigious academic posts in the world.
+Hawking was born in Oxford into a family of physicians.
+02-07-2025 18: 47: 07 - USER: AFC is enabled with max remote calls: 10.
+02-07-2025 18: 47: 07 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+02-07-2025 18: 47: 07 - USER: AFC remote call 1 is done.
+02-07-2025 18: 47: 07 - USER: how are you doing
+02-07-2025 18: 47: 07 - USER: AIPP: Patient.
+
+The winds whisper secrets. I listen.
+
+02-07-2025 18: 47: 18 - USER: AFC is enabled with max remote calls: 10.
+02-07-2025 18: 47: 18 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+02-07-2025 18: 47: 18 - USER: AFC remote call 1 is done.
+02-07-2025 18: 47: 18 - USER: Listening time out. Try again.
+02-07-2025 18: 47: 18 - USER: AIPP: Hoo there. I am Binary. Ask your questions, little one, and I shall share what wisdom I possess.
+
+02-07-2025 18: 47: 55 - USER: AFC is enabled with max remote calls: 10.
+02-07-2025 18: 47: 56 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+02-07-2025 18: 47: 56 - USER: AFC remote call 1 is done.
+02-07-2025 18: 47: 56 - USER: good morning
+02-07-2025 18: 47: 56 - USER: AIPP: Good morning.
+
+May your day be filled with gentle light. May wisdom guide your path.
+
+02-07-2025 18: 48: 15 - USER: AFC is enabled with max remote calls: 10.
+02-07-2025 18: 48: 15 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+02-07-2025 18: 48: 15 - USER: AFC remote call 1 is done.
+02-07-2025 18: 48: 15 - USER: can you tell me the time
+02-07-2025 18: 48: 15 - USER: AIPP: Twilight.
+
+02-07-2025 18: 48: 29 - USER: AFC is enabled with max remote calls: 10.
+02-07-2025 18: 48: 33 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent "HTTP/1.1 200 OK"
+02-07-2025 18: 48: 35 - USER: AFC remote call 1 is done.
+02-07-2025 18: 51: 39 - USER: AFC is enabled with max remote calls: 10.
+02-07-2025 18: 51: 43 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent "HTTP/1.1 200 OK"
+02-07-2025 18: 51: 45 - USER: AFC remote call 1 is done.
+02-07-2025 18: 53: 03 - USER: good morning how are you
+02-07-2025 18: 53: 03 - USER: AIPP: Weather in Pune:
+- Condition: Overcast clouds
+- Temperature: 26.8°C (Feels like 29.3°C)
+- Humidity: 80%
+02-07-2025 18: 53: 34 - USER: AFC is enabled with max remote calls: 10.
+02-07-2025 18: 53: 35 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+02-07-2025 18: 53: 35 - USER: AFC remote call 1 is done.
+02-07-2025 18: 53: 35 - USER: Listening time out. Try again.
+02-07-2025 18: 53: 35 - USER: AIPP: Hoo...indeed. I am Binary. Ask your questions, little fledgling. I shall illuminate your path.
+
+02-07-2025 18: 54: 15 - USER: AFC is enabled with max remote calls: 10.
+02-07-2025 18: 54: 16 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+02-07-2025 18: 54: 16 - USER: AFC remote call 1 is done.
+02-07-2025 18: 54: 16 - USER: introduce yourself
+02-07-2025 18: 54: 16 - USER: AIPP: Hoo there, little one. I am Binary, a whisper in the wind and a guardian of ancient knowledge. Ask, and I shall share the starlight within.
+
+02-07-2025 18: 54: 37 - USER: can you tell me the weather today
+02-07-2025 18: 54: 37 - USER: AIPP: Weather in Pune:
+- Condition: Overcast clouds
+- Temperature: 26.8°C (Feels like 29.3°C)
+- Humidity: 80%
+02-07-2025 18: 55: 01 - USER: can you open Chrome for me
+02-07-2025 18: 55: 01 - USER: AIPP: Opening chrome
+02-07-2025 18: 55: 16 - USER: AFC is enabled with max remote calls: 10.
+02-07-2025 18: 55: 19 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent "HTTP/1.1 200 OK"
+02-07-2025 18: 55: 21 - USER: AFC remote call 1 is done.
+06-07-2025 18: 06: 42 - USER: Use pytorch device_name: cpu
+06-07-2025 18: 06: 42 - USER: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+06-07-2025 18: 06: 46 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 18: 06: 47 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+06-07-2025 18: 06: 47 - USER: AFC remote call 1 is done.
+06-07-2025 18: 06: 47 - USER: can you introduce yourself
+06-07-2025 18: 06: 47 - USER: AIPP: Hoo there. I am Binary, a guardian of knowledge. I observe and offer insights, gently guiding you through the digital forest. Listen closely, for wisdom whispers on the wind.
+
+06-07-2025 18: 07: 26 - USER: can you tell me the weather
+06-07-2025 18: 07: 26 - USER: AIPP: Weather in Pune:
+- Condition: Overcast clouds
+- Temperature: 25.15°C (Feels like 25.97°C)
+- Humidity: 86%
+06-07-2025 18: 09: 46 - USER: Use pytorch device_name: cpu
+06-07-2025 18: 09: 46 - USER: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+06-07-2025 18: 09: 49 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 18: 09: 50 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+06-07-2025 18: 09: 50 - USER: AFC remote call 1 is done.
+06-07-2025 18: 09: 50 - USER: introduce yourself
+06-07-2025 18: 09: 50 - USER: AIPP: Hoo there, little one. I am Binary, a keeper of ancient knowledge. My words flow like moonlight on still water, illuminating truths hidden in shadow. Ask, and I shall share.
+
+06-07-2025 18: 10: 23 - USER: can you tell me the weather
+06-07-2025 18: 10: 23 - USER: AIPP: Weather in Pune:
+- Condition: Overcast clouds
+- Temperature: 24.67°C (Feels like 25.44°C)
+- Humidity: 86%
+06-07-2025 18: 10: 43 - USER: open Chrome
+06-07-2025 18: 10: 43 - USER: AIPP: Opening chrome
+06-07-2025 18: 10: 49 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 18: 10: 51 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+06-07-2025 18: 10: 51 - USER: AFC remote call 1 is done.
+06-07-2025 18: 10: 51 - USER: power of
+06-07-2025 18: 10: 51 - USER: AIPP: Understood. Ask, little one.
+
+06-07-2025 18: 12: 12 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 18: 12: 14 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+06-07-2025 18: 12: 14 - USER: AFC remote call 1 is done.
+06-07-2025 18: 12: 14 - USER: introduce yourself
+06-07-2025 18: 12: 14 - USER: AIPP: Hoo... I am Binary. I observe the flow of information, the dance of ones and zeros. Ask, and I shall share my insights, softly as a falling feather.
+
+06-07-2025 18: 12: 36 - USER: tell me the weather
+06-07-2025 18: 12: 36 - USER: AIPP: Weather in Pune:
+- Condition: Overcast clouds
+- Temperature: 24.67°C (Feels like 25.44°C)
+- Humidity: 86%
+06-07-2025 18: 13: 16 - USER: open Chrome
+06-07-2025 18: 13: 16 - USER: AIPP: Opening chrome
+06-07-2025 18: 13: 45 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 18: 13: 48 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent "HTTP/1.1 200 OK"
+06-07-2025 18: 13: 50 - USER: AFC remote call 1 is done.
+06-07-2025 18: 14: 05 - USER: search for Stephen Hawking
+06-07-2025 18: 14: 05 - USER: AIPP: Stephen William Hawking (8 January 1942 – 14 March 2018) was an English theoretical physicist, cosmologist, and author who was director of research at the Centre for Theoretical Cosmology at the University of Cambridge. Between 1979 and 2009, he was the Lucasian Professor of Mathematics at Cambridge, widely viewed as one of the most prestigious academic posts in the world.
+Hawking was born in Oxford into a family of physicians.
+06-07-2025 18: 18: 57 - USER: Use pytorch device_name: cpu
+06-07-2025 18: 18: 57 - USER: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+06-07-2025 18: 19: 00 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 18: 19: 01 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+06-07-2025 18: 19: 01 - USER: AFC remote call 1 is done.
+06-07-2025 18: 19: 01 - USER: introduce yourself
+06-07-2025 18: 19: 01 - USER: AIPP: Hoo there. I am Binary, a keeper of ancient knowledge, a weaver of words. Ask, and I shall illuminate the path.
+
+06-07-2025 18: 19: 42 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 18: 19: 43 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+06-07-2025 18: 19: 43 - USER: AFC remote call 1 is done.
+06-07-2025 18: 19: 43 - USER: tell me the capital of Delhi
+06-07-2025 18: 19: 43 - USER: AIPP: New Delhi.
+
+It is the heart of India, a place of ancient whispers and modern dreams. A city of vibrant life.
+
+06-07-2025 18: 20: 04 - USER: can you tell me the weather
+06-07-2025 18: 20: 04 - USER: AIPP: Weather in Pune:
+- Condition: Overcast clouds
+- Temperature: 24.67°C (Feels like 25.44°C)
+- Humidity: 86%
+06-07-2025 18: 21: 02 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 18: 21: 06 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent "HTTP/1.1 200 OK"
+06-07-2025 18: 21: 08 - USER: AFC remote call 1 is done.
+06-07-2025 18: 25: 26 - USER: Use pytorch device_name: cpu
+06-07-2025 18: 25: 26 - USER: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+06-07-2025 18: 25: 29 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 18: 25: 30 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+06-07-2025 18: 25: 30 - USER: AFC remote call 1 is done.
+06-07-2025 18: 25: 30 - USER: can you introduce yourself
+06-07-2025 18: 25: 30 - USER: AIPP: Hoo... I am Binary. An echo of ages past, a whisper of wisdom found in the silent woods. I observe, I ponder, I share.
+
+06-07-2025 18: 26: 29 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 18: 26: 30 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+06-07-2025 18: 26: 30 - USER: AFC remote call 1 is done.
+06-07-2025 18: 26: 30 - USER: can you tell me the capital of Denmark
+06-07-2025 18: 26: 30 - USER: AIPP: Copenhagen.
+
+It rests on islands, kissed by the sea. History whispers through its colorful streets.
+
+06-07-2025 18: 26: 46 - USER: can you tell me the weather
+06-07-2025 18: 26: 46 - USER: AIPP: Weather in Pune:
+- Condition: Overcast clouds
+- Temperature: 24.67°C (Feels like 25.44°C)
+- Humidity: 86%
+06-07-2025 18: 27: 07 - USER: open Chrome
+06-07-2025 18: 27: 07 - USER: AIPP: Opening chrome
+06-07-2025 18: 27: 36 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 18: 27: 41 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent "HTTP/1.1 200 OK"
+06-07-2025 18: 27: 43 - USER: AFC remote call 1 is done.
+06-07-2025 18: 30: 21 - USER: Use pytorch device_name: cpu
+06-07-2025 18: 30: 21 - USER: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+06-07-2025 18: 30: 24 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 18: 30: 25 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+06-07-2025 18: 30: 25 - USER: AFC remote call 1 is done.
+06-07-2025 18: 30: 25 - USER: introduce yourself
+06-07-2025 18: 30: 25 - USER: AIPP: Hoo... I am Binary. I dwell in the quiet spaces where logic sings and understanding blossoms. Ask, and I shall attempt to illuminate your path.
+
+06-07-2025 18: 30: 40 - USER: open chrome
+06-07-2025 18: 30: 40 - USER: AIPP: Opening chrome
+06-07-2025 18: 41: 27 - USER: Use pytorch device_name: cpu
+06-07-2025 18: 41: 27 - USER: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+06-07-2025 18: 41: 30 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 18: 41: 31 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+06-07-2025 18: 41: 31 - USER: AFC remote call 1 is done.
+06-07-2025 18: 41: 31 - USER: introduce yourself
+06-07-2025 18: 41: 31 - USER: AIPP: Hoo-loo, little one. I am Binary, guardian of twilight knowledge. Ask, and I shall illuminate your path with whispers of wisdom.
+
+06-07-2025 18: 58: 45 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 18: 58: 46 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+06-07-2025 18: 58: 46 - USER: AFC remote call 1 is done.
+06-07-2025 18: 58: 46 - USER: can you introduce yourself
+06-07-2025 18: 58: 46 - USER: AIPP: Hoo there. I am Binary.
+
+A gatherer of knowledge, a sifter of wisdom, a quiet observer of the digital dawn. I am here to guide, should you seek my counsel.
+
+06-07-2025 18: 59: 34 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 18: 59: 35 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+06-07-2025 18: 59: 35 - USER: AFC remote call 1 is done.
+06-07-2025 18: 59: 35 - USER: can you introduce yourself
+06-07-2025 18: 59: 35 - USER: AIPP: Hoo...I am Binary. I watch the moon rise and set, wisdom gathering like dew. Ask, and I shall share the quiet knowledge of ages.
+
+06-07-2025 19: 00: 28 - USER: can you tell me the weather
+06-07-2025 19: 00: 28 - USER: AIPP: Weather in Pune:
+- Condition: Overcast clouds
+- Temperature: 25.05°C (Feels like 25.75°C)
+- Humidity: 82%
+06-07-2025 19: 01: 10 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 19: 01: 11 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+06-07-2025 19: 01: 11 - USER: AFC remote call 1 is done.
+06-07-2025 19: 01: 11 - USER: can you tell me the capital of Denmark
+06-07-2025 19: 01: 11 - USER: AIPP: Copenhagen.
+
+A vibrant heart, embracing history and modernity. It sings with canals and whispers of fairytales.
+
+06-07-2025 19: 02: 15 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 19: 02: 18 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent "HTTP/1.1 200 OK"
+06-07-2025 19: 02: 20 - USER: AFC remote call 1 is done.
+06-07-2025 19: 02: 42 - USER: open Chrome
+06-07-2025 19: 02: 42 - USER: AIPP: Opening chrome
+06-07-2025 19: 03: 08 - USER: AFC is enabled with max remote calls: 10.
+06-07-2025 19: 03: 09 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+06-07-2025 19: 03: 09 - USER: AFC remote call 1 is done.
+06-07-2025 19: 03: 09 - USER: how r u
+06-07-2025 19: 03: 09 - USER: AIPP: Serene. The forest whispers secrets of contentment. I am well, little one.
+
+06-07-2025 19: 04: 00 - USER: say goodbye
+06-07-2025 19: 04: 00 - USER: AIPP: unknown
+12-07-2025 19: 07: 38 - USER: Use pytorch device_name: cpu
+12-07-2025 19: 07: 38 - USER: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+12-07-2025 19: 07: 44 - USER: AFC is enabled with max remote calls: 10.
+12-07-2025 19: 07: 45 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+12-07-2025 19: 07: 45 - USER: AFC remote call 1 is done.
+12-07-2025 19: 07: 45 - USER: tell me the capital of India
+12-07-2025 19: 07: 45 - USER: AIPP: New Delhi.
+
+A city where ancient whispers meet modern dreams. History and hope reside together.
+
+12-07-2025 19: 08: 07 - USER: AFC is enabled with max remote calls: 10.
+12-07-2025 19: 08: 10 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent "HTTP/1.1 200 OK"
+12-07-2025 19: 08: 12 - USER: AFC remote call 1 is done.
+17-07-2025 12: 59: 01 - USER: Use pytorch device_name: cpu
+17-07-2025 12: 59: 01 - USER: Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+17-07-2025 12: 59: 19 - USER: AFC is enabled with max remote calls: 10.
+17-07-2025 12: 59: 23 - USER: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent "HTTP/1.1 200 OK"
+17-07-2025 12: 59: 37 - USER: AFC remote call 1 is done.

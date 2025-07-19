@@ -125,7 +125,7 @@ def voicethread():
             def reset_stay():
                 set_stay(False)
                 schedule_collapse()
-            root.after(3000, reset_stay)  # wait 5 seconds before collapsing
+            root.after(1500, reset_stay)  # wait 5 seconds before collapsing
 
 def set_stay(value: bool):
     """
